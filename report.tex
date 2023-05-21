@@ -1,0 +1,51 @@
+\documentclass[12pt]{article}
+
+\addtolength{\oddsidemargin}{-.585in}
+\addtolength{\evensidemargin}{.585in}
+\addtolength{\topmargin}{-.585in}
+\addtolength{\textheight}{.760in}
+\addtolength{\textwidth}{1in}
+
+\usepackage[utf8]{inputenc}
+\usepackage[table]{xcolor}
+\usepackage{listings}
+\usepackage{float} 
+\usepackage{graphicx}
+\usepackage{hyperref}
+% \usepackage{svg}
+\usepackage[backend=biber, style=ieee, isbn=false,sortcites, maxbibnames=5, minbibnames=1]{biblatex}
+
+\definecolor{azulUC3M}{RGB}{0,0,102}
+
+\bibliography{bibliography}
+
+\begin{document}
+
+% cover
+\input{cover.tex}
+
+\section{Image extraction}
+
+After downloading Volatile 2.6.1 from the \href{https://github.com/volatilityfoundation/volatility/releases/tag/2.6.1}{source repository}, I copied the \texttt{i9100-CM\_3.0.64.zip} file into the \texttt{volatile/plugins/overlays/linux/} folder, and executed the following command:
+
+\begin{lstlisting}
+$ sudo python2 vol.py -f i9100-CM.bin --profile=Linuxi9100-CM_3_0_64ARM 
+linux_recover_filesystem --dump-dir ./output
+\end{lstlisting}
+
+Producing the complete image of the device.
+
+
+\section{Hash extraction}
+
+In Android devices, the password is stored in the file \texttt{/data/system/password.key}, in this case producing the following hashes:
+\begin{itemize}
+    \item \textbf{SHA1:} \texttt{a66a4a34a78aec1a7058c8fa3bb3b0f1cc537dd0}
+    \item \textbf{MD5:} \texttt{42f0f3f909f87d0706dcf139ab37f86e}
+\end{itemize}
+
+
+\section{Password cracking}
+
+
+\end{document}
