@@ -17,6 +17,6 @@ With all this information, what is the user's unlock password?
 ## Useful links
 - [Volatility foundation](https://www.volatilityfoundation.org)
 - [Volatility's source repository](https://github.com/volatilityfoundation/volatility)
+- [Hashcat](https://hashcat.net/hashcat/)
 - [Password cracking in Android](https://www.pentestpartners.com/security-blog/cracking-android-passwords-a-how-to/)
-- [JohnTheRipper](https://www.openwall.com/john/)
-- [Password cracking with JohnTheRipper](https://github.com/ldcas-uc3m/CE-Lab1)
+- [More cracking in Android](https://www.web3us.com/cyber-security/breaking-samsung-android-passwordspin)

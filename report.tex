@@ -38,14 +38,33 @@ Producing the complete image of the device.
 
 \section{Hash extraction}
 
-In Android devices, the password is stored in the file \texttt{/data/system/password.key}, in this case producing the following hashes:
+In Android devices, the password is stored in the file \texttt{/data/system/password.key}, in this case producing the following (concatenated) hashes:
 \begin{itemize}
     \item \textbf{SHA1:} \texttt{a66a4a34a78aec1a7058c8fa3bb3b0f1cc537dd0}
     \item \textbf{MD5:} \texttt{42f0f3f909f87d0706dcf139ab37f86e}
 \end{itemize}
 
+The salt for the hash can be located in the \texttt{/data/system/locksettings.db} database. We can access the database with an SQL viewer, for example:
+\begin{lstlisting}
+$ sqlite3 locksettings.db
+\end{lstlisting}
+
+By using a query we can obtain the salt:
+\begin{lstlisting}
+sqlite> SELECT * FROM locksettings WHERE name='lockscreen.password_salt';
+\end{lstlisting}
+
+Which returns the number \texttt{-6140990771726895285} (in decimal), which translates to \texttt{aac6d16df244374b} in hexadecimal (signed 2's complement).
 
 \section{Password cracking}
+I used Hashcat in order to crack this password. As we know the format of the password, we'll use a mask attack, assuming the "X"s can be any ascii character. As MD5 is faster than SHA1, I decided to use that format to crack it.
 
+The attack would therefore be:
+\begin{lstlisting}
+$ hashcat -m 10 42f0f3f909f87d0706dcf139ab37f86e:aac6d16df244374b 
+-a 3 'INS{?a?a?a?a?a}' -o out.out
+\end{lstlisting}
+
+The resulting cracked password was \texttt{INS\{t1MmY\}}.
 
 \end{document}
